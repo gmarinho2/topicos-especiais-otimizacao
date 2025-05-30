@@ -144,7 +144,9 @@ def avalia_rede_placeholder(hiperparametros, X_train, y_train):
     """
     PLACEHOLDER para AvaliaRede(). 
     
-    ESSA FUNÇÃO É APENAS UM PROTOTIPO PARA SIMULAR O TREINAMENTO DA REDE!!!!!
+    ESSA FUNÇÃO É APENAS PARA SIMULAR O TREINAMENTO DA REDE!!!!!
+    NÃO IMPLEMENTADA!! TEM QUE IMPLEMENTAR ISSO AQUI EH DE SACANAGEM!!!!
+
     
     """
     print(f"\nAvaliando: {hiperparametros}")
@@ -170,7 +172,9 @@ def avalia_rede_placeholder(hiperparametros, X_train, y_train):
 def perturba_hiperparametros_placeholder(H_atual, config_hiperparametros):
     """
     PLACEHOLDER para Perturba().
-    Gera uma nova configuração de hiperparâmetros (vizinha) a partir da atual.
+    Gera uma nova configuração de hiperparâmetros (vizinha) a partir da atual. 
+    (OU SEJA, DEFINE COMO VAO SER ALTERADOS NA PERTURBAÇÃO, SE SOMA 1, SUBTRAI 0.4, MUDA ATIVACAO ETC)
+    NÃO IMPLEMENTADA!! TEM QUE IMPLEMENTAR ISSO AQUI EH DE SACANAGEM!!!!
     """
     H_novo = H_atual.copy()
     # Escolhe um hiperparâmetro aleatório para perturbar
