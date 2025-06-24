@@ -33,6 +33,15 @@ def gerar_solucao_inicial(definicoes_hiperparametros):
         max_val = definicao_hp.get("max")
         valor = None
 
+        if tipo == "choice":
+            opcoes = definicao_hp.get("options")
+            if opcoes is None or not isinstance(opcoes, list) or not opcoes:
+                raise ValueError(f"Para o tipo 'choice', a chave 'options' com uma lista não vazia é obrigatória para '{nome_hp}'.")
+            
+            valor = random.choice(opcoes)
+            N[nome_hp] = valor
+            continue 
+
         if tipo is None or min_val is None or max_val is None:
             raise ValueError(
                 f"A definição para o hiperparâmetro '{nome_hp}' está incompleta. "
@@ -53,6 +62,16 @@ def gerar_solucao_inicial(definicoes_hiperparametros):
         N[nome_hp] = valor
 
     return N
+
+def solucao_inicial_tempera(definicoes_hiperparametros):
+    return gerar_solucao_inicial(definicoes_hiperparametros)
+
+def solucao_inicial_genetico(definicoes_hiperparametros, tamanho_populacao: int):
+    populacao = []
+    for membro in range(tamanho_populacao):
+        populacao.append(gerar_solucao_inicial(definicoes_hiperparametros))
+    return populacao
+
 
 if __name__ == '__main__':
     
