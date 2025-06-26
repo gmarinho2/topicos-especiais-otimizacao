@@ -17,47 +17,43 @@ def algoritmo_genetico(populacao_inicial, tamanho_populacao, num_geracoes, pm, d
         dict: O melhor indivíduo encontrado após todas as gerações.
     """
     # avaliar população inicial
-    P = []
+    populacao = []
     for individuo_sem_fitness in populacao_inicial:
         fitness = calcular_fitness(individuo_sem_fitness, parametros="placeholder", target="placeholder")
         individuo_com_fitness = individuo_sem_fitness.copy()
         individuo_com_fitness['fitness'] = fitness
-        P.append(individuo_com_fitness)
+        populacao.append(individuo_com_fitness)
 
-    #1.for g ← 1 to G do
-    for g in range(num_geracoes):
+    for geracao in range(num_geracoes):
         #2.Pnew ← ∅
-        Pnew = []
+        populacao_nova = []
         
         # 3.while |Pnew| < N do
-        while len(Pnew) < tamanho_populacao:
+        while len(populacao_nova) < tamanho_populacao:
             # 4. pai1, pai2 ← SelecaoTorneio(P)
-            pai1 = selecao_torneio(P)
-            pai2 = selecao_torneio(P)
+            pai1 = selecao_torneio(populacao)
+            pai2 = selecao_torneio(populacao)
             
-            # 5. filho ← Cruzamento(pai1, pai2)
             filho = cruzamento(pai1, pai2)
-            
-            # 6. filho ← Mutacao(filho, pm)
             filho = mutacao(filho, pm, definicoes_hp)
             
-            # Avalia o novo filho
+            # avalia o novo filho
             fitness_filho = calcular_fitness(filho, parametros="placeholder", target="placeholder")
             filho['fitness'] = fitness_filho
             
-            # 7. Adicione filho a Pnew
-            Pnew.append(filho)
+            # 7. adicione filho a Pnew
+            populacao_nova.append(filho)
         # 8. end
         
         # 9. P ← SelecionaMelhores(P ∪ Pnew, N)
-        P_combinada = P + Pnew
-        P = seleciona_melhores(P_combinada, tamanho_populacao)
+        P_combinada = populacao + populacao_nova
+        populacao = seleciona_melhores(P_combinada, tamanho_populacao)
         
         # log do progresso
-        melhor_da_geracao = P[0]
-        print(f"Geração {g+1}/{num_geracoes} | Melhor RMSE: {melhor_da_geracao['fitness']:.4f}")
+        melhor_da_geracao = populacao[0]
+        print(f"Geração {geracao+1}/{num_geracoes} | Melhor RMSE: {melhor_da_geracao['fitness']:.4f}")
     
-    melhor_final = P[0]
+    melhor_final = populacao[0]
     return melhor_final
 
 
@@ -93,7 +89,7 @@ if __name__ == '__main__':
     
     print("-" * 30)
     print("Otimização Concluída!")
-    
+
     print("\nMelhor indivíduo encontrado:")
     for nome, valor_gerado in melhor_individuo_encontrado.items():
         print(f" | {nome}: {valor_gerado}")

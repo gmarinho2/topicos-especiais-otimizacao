@@ -15,24 +15,22 @@ def tempera_simulada(
     max_iter_por_temperatura=50     # Número de perturbações por nível de temperatura
 ):
 
-    # 1. Hbest_global, Hbest ← H0, H0
+    # avalia o candidato inicial
     Hbest_global = hiperparametros_inicias.copy()
-    Hbest_iter = hiperparametros_inicias.copy() #candidato atual
-
-    # 2. Avalie Hbest com AvaliaRede()
+    Hbest_iter = hiperparametros_inicias.copy()
     score_best_iter = avalia_rede_func(Hbest_iter, dados_treino_X, dados_treino_y)
     score_best_global = score_best_iter
 
     print(f"Avaliando configuração inicial hiperparametros_inicias: {hiperparametros_inicias}")
     print(f"Score inicial (hiperparametros_inicias): {score_best_iter:.5f}")
     
-    # 3. T ← T0
+    # temperatura é inicializada
     temperatura = temperatura_inicial
     
     iter_sem_melhora_global_count = 0
     ciclos_resfriamento = 0
 
-    # 4. while T > Tmin E ainda não teve 30 iterações sem melhora
+    # enquanto temperatura não é a minima E ainda não teve 10 iterações sem melhora
     while temperatura > temperatura_minima and iter_sem_melhora_global_count < max_iter_sem_melhora_global:
         ciclos_resfriamento += 1
         print(f"\nCiclo de Resfriamento {ciclos_resfriamento} - Temperatura: {temperatura:.5f}")
@@ -61,7 +59,6 @@ def tempera_simulada(
 
                 # após aceitar uma solução, verificamos se ela é um novo melhor global
                 if score_best_iter < score_best_global:
-                    # 10. Hbest_global ← Hbest_iter
                     Hbest_global = Hbest_iter.copy()
                     score_best_global = score_best_iter
                     iter_sem_melhora_global_count = 0 
@@ -92,7 +89,7 @@ def tempera_simulada(
 
 
 if __name__ == '__main__':
-    # Dados de treino (dummy)
+    # dados fictícios
     X_dummy = np.random.rand(100, 10) # 100 amostras, 10 features
     y_dummy = np.random.randint(0, 2, 100) # Classificação binária
 
@@ -112,18 +109,18 @@ if __name__ == '__main__':
     max_iter_sem_melhora_ex = 10
     max_iter_por_temp_ex = 10
 
-    print("Iniciando Tempera Simulada para Otimização de Hiperparâmetros (com placeholders)...")
-
+    print("############################ INICIO TEMPERA SIMULADA ##############################")
+    
     melhores_hiperparametros, melhor_score_final = tempera_simulada(
-        dados_treino_X=X_dummy,
-        dados_treino_y=y_dummy,
-        hiperparametros_inicias=hiperparametros_inicias_exemplo,
-        temperatura_inicial=temperatura_inicial_exemplo,
-        taxa_resfriamento=taxa_resfriamento_EXEMPLO,
-        temperatura_minima=temperatura_minima,
-        config_hiperparametros=definicoes_hiperparametros,
-        max_iter_sem_melhora_global=max_iter_sem_melhora_ex,
-        max_iter_por_temperatura=max_iter_por_temp_ex
+        X_dummy,
+        y_dummy,
+        hiperparametros_inicias_exemplo,
+        temperatura_inicial_exemplo,
+        taxa_resfriamento_EXEMPLO,
+        temperatura_minima,
+        definicoes_hiperparametros,
+        max_iter_sem_melhora_ex,
+        max_iter_por_temp_ex
     )
 
     for nome, valor_gerado in melhores_hiperparametros.items():

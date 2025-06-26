@@ -145,7 +145,7 @@ def mutacao(individuo, pm, definicoes_hiperparametros):
     individuo_mutado = individuo.copy()
     for gene in individuo_mutado:
         if random.random() < pm:
-            # Gera um novo valor aleatório para este gene
+            
             definicao_gene = definicoes_hiperparametros[gene]
             tipo = definicao_gene.get("type")
             

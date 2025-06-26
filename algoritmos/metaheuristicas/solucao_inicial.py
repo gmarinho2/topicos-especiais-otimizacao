@@ -87,8 +87,15 @@ if __name__ == '__main__':
     for nome, definicao in definicoes_hp_exemplo.items():
         print(f"  {nome}: {definicao}")
 
-    solucao_inicial_tempera = gerar_solucao_inicial(definicoes_hp_exemplo)
+    solucao_inicial_tempe = solucao_inicial_tempera(definicoes_hp_exemplo)
+    solucao_inicial_genet = solucao_inicial_genetico(definicoes_hp_exemplo, 5)
 
     print("\nSolução Inicial Gerada (N):")
-    for nome, valor_gerado in solucao_inicial_tempera.items():
+    for nome, valor_gerado in solucao_inicial_tempe.items():
         print(f"  {nome}: {valor_gerado}")
+
+
+    for i in range(len(solucao_inicial_genet)):
+        print(f"\nSolução {i}:")
+        for nome, valor_gerado in solucao_inicial_genet[i].items():
+            print(f"  {nome}: {valor_gerado}")
