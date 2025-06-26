@@ -68,7 +68,7 @@ def solucao_inicial_tempera(definicoes_hiperparametros):
 
 def solucao_inicial_genetico(definicoes_hiperparametros, tamanho_populacao: int):
     populacao = []
-    for membro in range(tamanho_populacao):
+    for _ in range(tamanho_populacao):
         populacao.append(gerar_solucao_inicial(definicoes_hiperparametros))
     return populacao
 
@@ -87,41 +87,8 @@ if __name__ == '__main__':
     for nome, definicao in definicoes_hp_exemplo.items():
         print(f"  {nome}: {definicao}")
 
-    solucao_inicial_gerada = gerar_solucao_inicial(definicoes_hp_exemplo)
+    solucao_inicial_tempera = gerar_solucao_inicial(definicoes_hp_exemplo)
 
     print("\nSolução Inicial Gerada (N):")
-    for nome, valor_gerado in solucao_inicial_gerada.items():
+    for nome, valor_gerado in solucao_inicial_tempera.items():
         print(f"  {nome}: {valor_gerado}")
-
-    #populacao_inicial = []
-
-    #for n in range(20):
-    #    solucao_inicial_gerada = gerar_solucao_inicial(definicoes_hp_exemplo)
-    #    populacao_inicial.append(solucao_inicial_gerada)
-    #    print(f"--------------------------------------------")
-    #    for nome, definicao in solucao_inicial_gerada.items():
-    #        print(f"  {nome}: {definicao}")
-
-    
-
-
-    # Exemplo com uma definição inválida para demonstrar o tratamento de erro
-    #definicoes_hp_erro = {
-    #    "parametro_ok": {"type": "float", "min": 0.0, "max": 1.0},
-    #    "parametro_tipo_errado": {"type": "string", "min": 1, "max": 10} # Tipo 'string' não suportado
-    #}
-    #try:
-    #    print("\nTestando com tipo de hiperparâmetro inválido:")
-    #    gerar_solucao_inicial(definicoes_hp_erro)
-    #except ValueError as e:
-    #    print(f"Erro esperado: {e}")
-
-    #definicoes_hp_incompleto = {
-    #    "parametro_incompleto": {"type": "float", "min": 0.0} # Falta 'max'
-    #}
-    #try:
-    #    print("\nTestando com definição de hiperparâmetro incompleta:")
-    #    gerar_solucao_inicial(definicoes_hp_incompleto)
-    #except ValueError as e:
-    #    print(f"Erro esperado: {e}")
-

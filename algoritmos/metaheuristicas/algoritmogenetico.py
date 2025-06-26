@@ -1,7 +1,6 @@
-import random
-
 from solucao_inicial import solucao_inicial_genetico
 from utils import calcular_fitness, cruzamento, mutacao, selecao_torneio, seleciona_melhores
+
 
 def algoritmo_genetico(populacao_inicial, tamanho_populacao, num_geracoes, pm, definicoes_hp):
     """
@@ -20,37 +19,37 @@ def algoritmo_genetico(populacao_inicial, tamanho_populacao, num_geracoes, pm, d
     # avaliar população inicial
     P = []
     for individuo_sem_fitness in populacao_inicial:
-        fitness = calcular_fitness(individuo_sem_fitness)
+        fitness = calcular_fitness(individuo_sem_fitness, parametros="placeholder", target="placeholder")
         individuo_com_fitness = individuo_sem_fitness.copy()
         individuo_com_fitness['fitness'] = fitness
         P.append(individuo_com_fitness)
 
-    # 1 for g ← 1 to G do
+    #1.for g ← 1 to G do
     for g in range(num_geracoes):
-        # 2 Pnew ← ∅
+        #2.Pnew ← ∅
         Pnew = []
         
-        # 3 while |Pnew| < N do
+        # 3.while |Pnew| < N do
         while len(Pnew) < tamanho_populacao:
-            # 4 pai1, pai2 ← SelecaoTorneio(P)
+            # 4. pai1, pai2 ← SelecaoTorneio(P)
             pai1 = selecao_torneio(P)
             pai2 = selecao_torneio(P)
             
-            # 5 filho ← Cruzamento(pai1, pai2)
+            # 5. filho ← Cruzamento(pai1, pai2)
             filho = cruzamento(pai1, pai2)
             
-            # 6 filho ← Mutacao(filho, pm)
+            # 6. filho ← Mutacao(filho, pm)
             filho = mutacao(filho, pm, definicoes_hp)
             
             # Avalia o novo filho
-            fitness_filho = calcular_fitness(filho)
+            fitness_filho = calcular_fitness(filho, parametros="placeholder", target="placeholder")
             filho['fitness'] = fitness_filho
             
-            # 7 Adicione filho a Pnew
+            # 7. Adicione filho a Pnew
             Pnew.append(filho)
-        # 8 end
+        # 8. end
         
-        # 9 P ← SelecionaMelhores(P ∪ Pnew, N)
+        # 9. P ← SelecionaMelhores(P ∪ Pnew, N)
         P_combinada = P + Pnew
         P = seleciona_melhores(P_combinada, tamanho_populacao)
         
@@ -94,9 +93,7 @@ if __name__ == '__main__':
     
     print("-" * 30)
     print("Otimização Concluída!")
+    
     print("\nMelhor indivíduo encontrado:")
-    for chave, valor in melhor_individuo_encontrado.items():
-        if chave == 'fitness':
-            print(f"  - Menor RMSE (Fitness): {valor:.4f}")
-        else:
-            print(f"  - {chave}: {valor}")
+    for nome, valor_gerado in melhor_individuo_encontrado.items():
+        print(f" | {nome}: {valor_gerado}")
