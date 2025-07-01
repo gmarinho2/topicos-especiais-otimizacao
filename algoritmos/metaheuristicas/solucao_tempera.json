@@ -1,0 +1,20 @@
+{
+    "taxa_aprendizado": 0.05968382746991116,
+    "numero_camadas": 5,
+    "ativacao": "identity",
+    "neuronios_camada_1": 83,
+    "neuronios_camada_2": 93,
+    "neuronios_camada_3": 76,
+    "neuronios_camada_4": 32,
+    "neuronios_camada_5": 75,
+    "neuronios_camada_6": 32,
+    "neuronios_camada_7": 44,
+    "neuronios_camada_8": 78,
+    "neuronios_camada_9": 61,
+    "neuronios_camada_10": 75,
+    "neuronios_camada_11": 74,
+    "neuronios_camada_12": 31,
+    "neuronios_camada_13": 56,
+    "neuronios_camada_14": 84,
+    "neuronios_camada_15": 91
+}
